@@ -5,122 +5,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>AI Google Review</title>
-    <meta name="description" content="Create your Google review in seconds">
+
+    <meta name="description"
+          content="Create your Google review in seconds">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="container">
+<div class="app">
 
-    <!-- Header -->
+    <!-- HEADER -->
+
     <header class="header">
+
         <div class="logo">★</div>
-        <h1>Share Your Experience</h1>
-        <p>Create your Google review in a few taps</p>
+
+        <h1>Shree Shivshakti Enterprises</h1>
+
+        <p>
+            Share your experience with us
+        </p>
+
     </header>
 
 
-    <main class="card">
+    <!-- PRODUCT SCREEN -->
 
-        <!-- Rating -->
-        <section class="question">
-            <h2>How was your experience?</h2>
+    <main id="productScreen" class="card">
 
-            <div class="stars" id="stars">
+        <h2>
+            What did you purchase?
+        </h2>
 
-                <button data-rating="1">★</button>
-                <button data-rating="2">★</button>
-                <button data-rating="3">★</button>
-                <button data-rating="4">★</button>
-                <button data-rating="5">★</button>
-
-            </div>
-
-            <p class="rating-text" id="ratingText">
-                Excellent
-            </p>
-        </section>
+        <p class="subtitle">
+            Select your product and we'll prepare your review.
+        </p>
 
 
-        <!-- Product -->
-        <section class="question">
+        <div class="products">
 
-            <h2>What did you purchase?</h2>
+            <button
+                class="product"
+                data-product="Nilkamal Chair"
+                data-key="chair">
 
-            <div class="options" id="productOptions">
+                <span class="product-icon">🪑</span>
 
-                <button data-value="Nilkamal Chair">
-                    🪑 Chair
-                </button>
+                <span>
+                    <strong>Nilkamal Chair</strong>
+                    <small>Chair</small>
+                </span>
 
-                <button data-value="Nilkamal Table">
-                    🪑 Table
-                </button>
+                <span class="arrow">›</span>
 
-                <button data-value="Nilkamal Cupboard">
-                    🗄️ Cupboard
-                </button>
-
-                <button data-value="Furniture">
-                    🏠 Other Furniture
-                </button>
-
-            </div>
-
-        </section>
+            </button>
 
 
-        <!-- Product experience -->
-        <section class="question">
+            <button
+                class="product"
+                data-product="Nilkamal Table"
+                data-key="table">
 
-            <h2>What did you like?</h2>
+                <span class="product-icon">🪑</span>
 
-            <div class="options multi" id="experienceOptions">
+                <span>
+                    <strong>Nilkamal Table</strong>
+                    <small>Table</small>
+                </span>
 
-                <button data-value="the excellent quality">
-                    ⭐ Quality
-                </button>
+                <span class="arrow">›</span>
 
-                <button data-value="the comfortable design">
-                    😊 Comfort
-                </button>
-
-                <button data-value="the attractive design">
-                    🎨 Design
-                </button>
-
-                <button data-value="the reasonable price">
-                    💰 Price
-                </button>
-
-                <button data-value="the strong and durable build">
-                    💪 Durability
-                </button>
-
-            </div>
-
-        </section>
+            </button>
 
 
-        <!-- Service -->
-        <section class="question">
+            <button
+                class="product"
+                data-product="Nilkamal Cupboard"
+                data-key="cupboard">
 
-            <h2>How was the service?</h2>
+                <span class="product-icon">🗄️</span>
 
-            <div class="options" id="serviceOptions">
+                <span>
+                    <strong>Nilkamal Cupboard</strong>
+                    <small>Cupboard</small>
+                </span>
 
-                <button data-value="helpful staff">
-                    👍 Helpful Staff
-                </button>
+                <span class="arrow">›</span>
 
-                <button data-value="quick service">
-                    ⚡ Quick Service
-                </button>
+            </button>
 
-                <button data-value="smooth buying experience">
-                    😊 Easy Experience
-                </button>
 
-                <button data-value="fast
+            <button
+                class="product"
+                data-product="Furniture"
+                data-key="furniture">
+
+                <span class="product-icon">🏠</span>
+
+                <span>
+                    <strong>Other Furniture</strong>
+                    <small>Furniture</small>
+                </span>
+
+                <span class="arrow">›</span>
+
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- LOADING SCREEN -->
+
+    <div id="loadingScreen" class="loading">
+
+        <div class="spinner"></div>
+
+        <h2>Creating your review...</h2>
+
+        <p>
+            Please wait a moment
+        </p>
+
+    </div>
+
+
+    <!-- REVIEW SCREEN -->
+
+   
