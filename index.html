@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>AI Google Review Generator</title>
+    <meta name="description" content="Create a natural Google review in seconds.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="brand">
+        <div class="logo">★</div>
+        <h1>AI Review</h1>
+        <p>Create your Google review in seconds</p>
+    </div>
+
+    <div class="card">
+
+        <h2>How was your experience?</h2>
+        <p class="subtitle">
+            Tell us about your genuine experience and we'll help you write it naturally.
+        </p>
+
+        <!-- Rating -->
+        <label>Your Rating</label>
+
+        <div class="stars" id="stars">
+            <button data-rating="1">★</button>
+            <button data-rating="2">★</button>
+            <button data-rating="3">★</button>
+            <button data-rating="4">★</button>
+            <button data-rating="5">★</button>
+        </div>
+
+        <input type="hidden" id="rating" value="5">
+
+        <!-- Product -->
+        <label for="product">What did you purchase?</label>
+
+        <input
+            type="text"
+            id="product"
+            placeholder="Example: Nilkamal Chair"
+            maxlength="100"
+        >
+
+        <!-- Experience -->
+        <label for="experience">What did you like?</label>
+
+        <textarea
+            id="experience"
+            placeholder="Example: Good quality, comfortable and strong..."
+            maxlength="500"
+        ></textarea>
+
+        <!-- Service -->
+        <label for="service">How was the service?</label>
+
+        <textarea
+            id="service"
+            placeholder="Example: Staff was helpful and delivery was quick..."
+            maxlength="300"
+        ></textarea>
+
+        <button class="generate-btn" id="generateBtn">
+            ✨ Generate Review
+        </button>
+
+        <!-- Result -->
+        <div class="result" id="result">
+
+            <div class="result-header">
+                <h3>Your Review</h3>
+                <span id="reviewRating">★★★★★</span>
+            </div>
+
+            <textarea id="reviewText"></textarea>
+
+            <div class="actions">
+
+                <button class="copy-btn" id="copyBtn">
+                    📋 Copy Review
+                </button>
+
+                <button class="google-btn" id="googleBtn">
+                    ⭐ Leave Google Review
+                </button>
+
+            </div>
+
+            <p class="notice">
+                Please read and edit the review if needed before posting.
+                Your review should reflect your genuine experience.
+            </p>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Powered by AI Review Generator</p>
+    </footer>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
