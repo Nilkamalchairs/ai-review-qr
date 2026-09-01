@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AI Google Review Generator</title>
-    <meta name="description" content="Create a natural Google review in seconds.">
+    <title>AI Google Review</title>
+    <meta name="description" content="Create your Google review in seconds">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,102 +14,113 @@
 
 <div class="container">
 
-    <div class="brand">
+    <!-- Header -->
+    <header class="header">
         <div class="logo">★</div>
-        <h1>AI Review</h1>
-        <p>Create your Google review in seconds</p>
-    </div>
+        <h1>Share Your Experience</h1>
+        <p>Create your Google review in a few taps</p>
+    </header>
 
-    <div class="card">
 
-        <h2>How was your experience?</h2>
-        <p class="subtitle">
-            Tell us about your genuine experience and we'll help you write it naturally.
-        </p>
+    <main class="card">
 
         <!-- Rating -->
-        <label>Your Rating</label>
+        <section class="question">
+            <h2>How was your experience?</h2>
 
-        <div class="stars" id="stars">
-            <button data-rating="1">★</button>
-            <button data-rating="2">★</button>
-            <button data-rating="3">★</button>
-            <button data-rating="4">★</button>
-            <button data-rating="5">★</button>
-        </div>
+            <div class="stars" id="stars">
 
-        <input type="hidden" id="rating" value="5">
+                <button data-rating="1">★</button>
+                <button data-rating="2">★</button>
+                <button data-rating="3">★</button>
+                <button data-rating="4">★</button>
+                <button data-rating="5">★</button>
+
+            </div>
+
+            <p class="rating-text" id="ratingText">
+                Excellent
+            </p>
+        </section>
+
 
         <!-- Product -->
-        <label for="product">What did you purchase?</label>
+        <section class="question">
 
-        <input
-            type="text"
-            id="product"
-            placeholder="Example: Nilkamal Chair"
-            maxlength="100"
-        >
+            <h2>What did you purchase?</h2>
 
-        <!-- Experience -->
-        <label for="experience">What did you like?</label>
+            <div class="options" id="productOptions">
 
-        <textarea
-            id="experience"
-            placeholder="Example: Good quality, comfortable and strong..."
-            maxlength="500"
-        ></textarea>
+                <button data-value="Nilkamal Chair">
+                    🪑 Chair
+                </button>
+
+                <button data-value="Nilkamal Table">
+                    🪑 Table
+                </button>
+
+                <button data-value="Nilkamal Cupboard">
+                    🗄️ Cupboard
+                </button>
+
+                <button data-value="Furniture">
+                    🏠 Other Furniture
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Product experience -->
+        <section class="question">
+
+            <h2>What did you like?</h2>
+
+            <div class="options multi" id="experienceOptions">
+
+                <button data-value="the excellent quality">
+                    ⭐ Quality
+                </button>
+
+                <button data-value="the comfortable design">
+                    😊 Comfort
+                </button>
+
+                <button data-value="the attractive design">
+                    🎨 Design
+                </button>
+
+                <button data-value="the reasonable price">
+                    💰 Price
+                </button>
+
+                <button data-value="the strong and durable build">
+                    💪 Durability
+                </button>
+
+            </div>
+
+        </section>
+
 
         <!-- Service -->
-        <label for="service">How was the service?</label>
+        <section class="question">
 
-        <textarea
-            id="service"
-            placeholder="Example: Staff was helpful and delivery was quick..."
-            maxlength="300"
-        ></textarea>
+            <h2>How was the service?</h2>
 
-        <button class="generate-btn" id="generateBtn">
-            ✨ Generate Review
-        </button>
+            <div class="options" id="serviceOptions">
 
-        <!-- Result -->
-        <div class="result" id="result">
-
-            <div class="result-header">
-                <h3>Your Review</h3>
-                <span id="reviewRating">★★★★★</span>
-            </div>
-
-            <textarea id="reviewText"></textarea>
-
-            <div class="actions">
-
-                <button class="copy-btn" id="copyBtn">
-                    📋 Copy Review
+                <button data-value="helpful staff">
+                    👍 Helpful Staff
                 </button>
 
-                <button class="google-btn" id="googleBtn">
-                    ⭐ Leave Google Review
+                <button data-value="quick service">
+                    ⚡ Quick Service
                 </button>
 
-            </div>
+                <button data-value="smooth buying experience">
+                    😊 Easy Experience
+                </button>
 
-            <p class="notice">
-                Please read and edit the review if needed before posting.
-                Your review should reflect your genuine experience.
-            </p>
-
-        </div>
-
-    </div>
-
-    <footer>
-        <p>Powered by AI Review Generator</p>
-    </footer>
-
-</div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+                <button data-value="fast
