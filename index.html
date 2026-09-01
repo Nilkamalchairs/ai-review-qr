@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AI Google Review</title>
+    <title>AI Review Generator</title>
 
-    <meta name="description"
-          content="Create your Google review in seconds">
+    <meta
+        name="description"
+        content="Generate a natural Google review in seconds."
+    >
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -31,167 +33,98 @@
     </header>
 
 
-    <!-- PRODUCT SCREEN -->
+    <!-- MAIN -->
 
-    <main id="productScreen" class="card">
+    <main class="card">
 
-        <h2>
-            What did you purchase?
-        </h2>
+        <!-- PRODUCT -->
 
-        <p class="subtitle">
-            Select your product and we'll prepare your review.
-        </p>
+        <div class="section">
 
+            <label>
+                Select Product
+            </label>
 
-        <div class="products">
+            <select id="product">
 
-            <button
-                class="product"
-                data-product="Nilkamal Chair"
-                data-key="chair">
+                <option value="">
+                    Select a product
+                </option>
 
-                <span class="product-icon">🪑</span>
+                <option value="Nilkamal Chair">
+                    Nilkamal Chair
+                </option>
 
-                <span>
-                    <strong>Nilkamal Chair</strong>
-                    <small>Chair</small>
-                </span>
+                <option value="Nilkamal Table">
+                    Nilkamal Table
+                </option>
 
-                <span class="arrow">›</span>
+                <option value="Nilkamal Cupboard">
+                    Nilkamal Cupboard
+                </option>
 
-            </button>
+                <option value="Nilkamal Furniture">
+                    Other Nilkamal Furniture
+                </option>
 
-
-            <button
-                class="product"
-                data-product="Nilkamal Table"
-                data-key="table">
-
-                <span class="product-icon">🪑</span>
-
-                <span>
-                    <strong>Nilkamal Table</strong>
-                    <small>Table</small>
-                </span>
-
-                <span class="arrow">›</span>
-
-            </button>
-
-
-            <button
-                class="product"
-                data-product="Nilkamal Cupboard"
-                data-key="cupboard">
-
-                <span class="product-icon">🗄️</span>
-
-                <span>
-                    <strong>Nilkamal Cupboard</strong>
-                    <small>Cupboard</small>
-                </span>
-
-                <span class="arrow">›</span>
-
-            </button>
-
-
-            <button
-                class="product"
-                data-product="Furniture"
-                data-key="furniture">
-
-                <span class="product-icon">🏠</span>
-
-                <span>
-                    <strong>Other Furniture</strong>
-                    <small>Furniture</small>
-                </span>
-
-                <span class="arrow">›</span>
-
-            </button>
-
-        </div>
-
-    </main>
-
-
-    <!-- LOADING SCREEN -->
-
-    <div id="loadingScreen" class="loading">
-
-        <div class="spinner"></div>
-
-        <h2>Creating your review...</h2>
-
-        <p>
-            Please wait a moment
-        </p>
-
-    </div>
-
-
-    <!-- REVIEW SCREEN -->
-
-    <main id="reviewScreen" class="card review-screen">
-
-        <div class="success">
-
-            <div class="check">✓</div>
-
-            <h2>Your review is ready!</h2>
-
-            <p>
-                Please check the review before posting.
-            </p>
+            </select>
 
         </div>
 
 
-        <div class="review-box">
+        <!-- REVIEW -->
 
-            <div class="stars">
-                ★★★★★
-            </div>
+        <div class="section">
 
-            <p id="reviewText"></p>
+            <label>
+                Your Review
+            </label>
+
+            <textarea
+                id="review"
+                placeholder="Your review will be written automatically..."
+            ></textarea>
 
         </div>
 
 
-        <button
-            id="copyBtn"
-            class="copy-btn">
+        <!-- BUTTONS -->
 
-            📋 Copy Review
+        <div class="buttons">
 
-        </button>
-
-
-        <button
-            id="googleBtn"
-            class="google-btn">
-
-            ⭐ Post on Google
-
-        </button>
+            <button
+                id="rewriteBtn"
+                class="rewrite-btn"
+                type="button"
+            >
+                ✨ Rewrite
+            </button>
 
 
-        <button
-            id="backBtn"
-            class="back-btn">
+            <button
+                id="submitBtn"
+                class="submit-btn"
+                type="button"
+            >
+                ⭐ Submit Review
+            </button>
 
-            ← Choose Another Product
+        </div>
 
-        </button>
+
+        <!-- MESSAGE -->
+
+        <div
+            id="message"
+            class="message"
+        ></div>
 
 
         <p class="notice">
 
-            Please make sure the review accurately reflects
-            your genuine experience before posting it.
+            Please check the review and make sure it
+            accurately reflects your genuine experience
+            before submitting.
 
         </p>
 
@@ -200,9 +133,7 @@
 
     <footer>
 
-        <p>
-            Powered by AI Review
-        </p>
+        AI Review Generator
 
     </footer>
 
