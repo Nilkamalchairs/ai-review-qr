@@ -3,243 +3,208 @@
 // ==========================================
 
 const BUSINESS_NAME =
-    "Shree Shivshakti Enterprises";
+    "SHREE SHIVSHAKTI ENTERPRISES";
 
 const BUSINESS_LOCATION =
-    "Thane West";
+    "Manpada - Thane West";
 
 
 // ==========================================
 // GOOGLE REVIEW LINK
 // ==========================================
-//
-// Replace this with your actual Google
-// review link.
-//
+
+// Replace this with your actual Google Review URL
 
 const GOOGLE_REVIEW_URL =
     "YOUR_GOOGLE_REVIEW_LINK_HERE";
 
 
 // ==========================================
-// PRODUCT REVIEWS
-// ==========================================
-
-const productReviews = {
-
-    chair: {
-        product: "Nilkamal Chair",
-
-        review:
-            `I recently purchased a Nilkamal Chair from ${BUSINESS_NAME} in ${BUSINESS_LOCATION}. The chair has excellent quality, a strong and durable build, and a comfortable design. The overall buying experience was smooth and the staff was helpful. I am happy with my purchase and would recommend this store for quality furniture in Thane.`
-    },
-
-
-    table: {
-        product: "Nilkamal Table",
-
-        review:
-            `I recently purchased a Nilkamal Table from ${BUSINESS_NAME} in ${BUSINESS_LOCATION}. The table has a strong build and good quality, and I really liked the design and finish. The staff was helpful and the buying experience was smooth. Overall, I am happy with my purchase and would recommend this store.`
-    },
-
-
-    cupboard: {
-        product: "Nilkamal Cupboard",
-
-        review:
-            `I recently purchased a Nilkamal Cupboard from ${BUSINESS_NAME} in ${BUSINESS_LOCATION}. The cupboard has good quality, a strong build and a practical design. The staff was helpful and the overall shopping experience was smooth. I am satisfied with my purchase and would recommend this store for furniture in Thane.`
-    },
-
-
-    furniture: {
-        product: "Furniture",
-
-        review:
-            `I recently purchased furniture from ${BUSINESS_NAME} in ${BUSINESS_LOCATION}. I was happy with the product quality, design and overall buying experience. The staff was helpful and the service was smooth. Overall, I had a good experience and would recommend this furniture store in Thane.`
-    }
-
-};
-
-
-// ==========================================
 // ELEMENTS
 // ==========================================
 
-const productScreen =
-    document.getElementById("productScreen");
+const product =
+    document.getElementById("product");
 
-const loadingScreen =
-    document.getElementById("loadingScreen");
+const review =
+    document.getElementById("review");
 
-const reviewScreen =
-    document.getElementById("reviewScreen");
+const rewriteBtn =
+    document.getElementById("rewriteBtn");
 
-const reviewText =
-    document.getElementById("reviewText");
+const submitBtn =
+    document.getElementById("submitBtn");
 
-const copyBtn =
-    document.getElementById("copyBtn");
-
-const googleBtn =
-    document.getElementById("googleBtn");
-
-const backBtn =
-    document.getElementById("backBtn");
+const message =
+    document.getElementById("message");
 
 
 // ==========================================
-// PRODUCT CLICK
+// PRODUCT SELECT
 // ==========================================
 
-const productButtons =
-    document.querySelectorAll(".product");
+product.addEventListener("change", () => {
+
+    const selectedProduct =
+        product.value;
 
 
-productButtons.forEach(button => {
+    if (!selectedProduct) {
 
-    button.addEventListener("click", () => {
+        review.value = "";
 
-        const productKey =
-            button.dataset.key;
-
-        createReview(productKey);
-
-    });
-
-});
-
-
-// ==========================================
-// CREATE REVIEW
-// ==========================================
-
-function createReview(productKey) {
-
-    const product =
-        productReviews[productKey];
-
-
-    if (!product) {
-
-        alert("Product not found.");
+        message.textContent = "";
 
         return;
 
     }
 
 
-    // Hide product screen
+    // Automatically generate review
 
-    productScreen.style.display = "none";
-
-
-    // Show loading
-
-    loadingScreen.classList.add("show");
-
-
-    // Simulate AI generation
-
-    setTimeout(() => {
-
-        loadingScreen.classList.remove("show");
-
-
-        reviewText.textContent =
-            product.review;
-
-
-        reviewScreen.classList.add("show");
-
-
-        reviewScreen.scrollIntoView({
-            behavior: "smooth"
-        });
-
-
-    }, 1200);
-
-}
-
-
-// ==========================================
-// COPY REVIEW
-// ==========================================
-
-copyBtn.addEventListener("click", async () => {
-
-    const text =
-        reviewText.textContent;
-
-
-    try {
-
-        await navigator.clipboard.writeText(text);
-
-        copyBtn.textContent =
-            "✓ Review Copied!";
-
-
-        setTimeout(() => {
-
-            copyBtn.textContent =
-                "📋 Copy Review";
-
-        }, 2000);
-
-
-    } catch (error) {
-
-        alert(
-            "Please select and copy the review manually."
-        );
-
-    }
+    generateReview(selectedProduct);
 
 });
 
 
 // ==========================================
-// GOOGLE REVIEW
+// GENERATE REVIEW
 // ==========================================
 
-googleBtn.addEventListener("click", () => {
+function generateReview(selectedProduct) {
+
+    message.textContent =
+        "✨ Writing your review...";
+
+    rewriteBtn.disabled = true;
+
+    submitBtn.disabled = true;
+
+
+    // Small delay for AI-like experience
+
+    setTimeout(() => {
+
+        const reviews = [
+
+            `I recently purchased a ${selectedProduct} from ${BUSINESS_NAME} in ${BUSINESS_LOCATION}. I was impressed with the product quality and overall buying experience. The staff was helpful and the service was smooth. I am happy with my purchase and would recommend this store for quality furniture in Thane.`,
+
+            `Had a good experience purchasing a ${selectedProduct} from ${BUSINESS_NAME}. The product quality is good and the overall service was smooth. The staff was helpful and made the buying process easy. Would recommend this furniture store in Thane.`,
+
+            `I purchased a ${selectedProduct} from ${BUSINESS_NAME}, Thane West. The product has good quality and a strong build. I also found the staff helpful and the buying experience convenient. Overall, I am satisfied with my purchase.`
+
+        ];
+
+
+        const randomReview =
+            reviews[
+                Math.floor(
+                    Math.random() * reviews.length
+                )
+            ];
+
+
+        review.value =
+            randomReview;
+
+
+        message.textContent =
+            "✓ Review generated";
+
+
+        rewriteBtn.disabled = false;
+
+        submitBtn.disabled = false;
+
+
+    }, 700);
+
+}
+
+
+// ==========================================
+// REWRITE
+// ==========================================
+
+rewriteBtn.addEventListener("click", () => {
+
+    const selectedProduct =
+        product.value;
+
+
+    if (!selectedProduct) {
+
+        message.textContent =
+            "Please select a product first.";
+
+        return;
+
+    }
+
+
+    generateReview(selectedProduct);
+
+});
+
+
+// ==========================================
+// SUBMIT
+// ==========================================
+
+submitBtn.addEventListener("click", () => {
+
+    const selectedProduct =
+        product.value;
+
+    const reviewText =
+        review.value.trim();
+
+
+    if (!selectedProduct) {
+
+        message.textContent =
+            "Please select a product.";
+
+        return;
+
+    }
+
+
+    if (!reviewText) {
+
+        message.textContent =
+            "Please generate a review first.";
+
+        return;
+
+    }
+
 
     if (
         GOOGLE_REVIEW_URL ===
         "YOUR_GOOGLE_REVIEW_LINK_HERE"
     ) {
 
-        alert(
-            "Please add your Google Review link in script.js"
-        );
+        message.textContent =
+            "Google Review link is not configured yet.";
 
         return;
 
     }
 
 
+    // Copy review first
+
+    navigator.clipboard
+        .writeText(reviewText)
+        .catch(() => {});
+
+
+    // Open Google
+
     window.open(
         GOOGLE_REVIEW_URL,
         "_blank"
     );
-
-});
-
-
-// ==========================================
-// BACK
-// ==========================================
-
-backBtn.addEventListener("click", () => {
-
-    reviewScreen.classList.remove("show");
-
-    productScreen.style.display = "block";
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
 
 });
