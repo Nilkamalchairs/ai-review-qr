@@ -1,1 +1,252 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 550px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+/* Brand */
+
+.brand {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo {
+    width: 55px;
+    height: 55px;
+    background: #4285f4;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font-size: 28px;
+}
+
+.brand h1 {
+    margin-top: 12px;
+    font-size: 28px;
+}
+
+.brand p {
+    color: #6b7280;
+    margin-top: 5px;
+}
+
+/* Card */
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 22px;
+}
+
+/* Labels */
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+/* Stars */
+
+.stars {
+    display: flex;
+    gap: 5px;
+}
+
+.stars button {
+    border: none;
+    background: transparent;
+    font-size: 38px;
+    cursor: pointer;
+    color: #d1d5db;
+    transition: 0.2s;
+}
+
+.stars button.active {
+    color: #fbbc04;
+}
+
+.stars button:hover {
+    transform: scale(1.1);
+}
+
+/* Inputs */
+
+input,
+textarea {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 13px;
+    font-size: 15px;
+    outline: none;
+    font-family: inherit;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #4285f4;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Generate */
+
+.generate-btn {
+    width: 100%;
+    border: none;
+    background: #4285f4;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+.generate-btn:hover {
+    background: #3367d6;
+}
+
+/* Result */
+
+.result {
+    display: none;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.result.show {
+    display: block;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.result-header h3 {
+    font-size: 18px;
+}
+
+#reviewRating {
+    color: #fbbc04;
+    letter-spacing: 2px;
+}
+
+/* Buttons */
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.copy-btn,
+.google-btn {
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.copy-btn {
+    border: 1px solid #d1d5db;
+    background: white;
+    color: #374151;
+}
+
+.google-btn {
+    border: none;
+    background: #34a853;
+    color: white;
+}
+
+.copy-btn:hover {
+    background: #f3f4f6;
+}
+
+.google-btn:hover {
+    background: #2d9148;
+}
+
+/* Notice */
+
+.notice {
+    margin-top: 15px;
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Footer */
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    .container {
+        padding: 15px 10px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .brand h1 {
+        font-size: 24px;
+    }
+
+    .stars button {
+        font-size: 34px;
+    }
+}
