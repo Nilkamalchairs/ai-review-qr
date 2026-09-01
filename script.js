@@ -2,365 +2,197 @@
 // BUSINESS SETTINGS
 // ==========================================
 
-const BUSINESS_NAME = "Shree Shivshakti Enterprises";
+const BUSINESS_NAME =
+    "Shree Shivshakti Enterprises";
 
-const BUSINESS_LOCATION = "Thane West";
-
-// Put your actual Google Review link here
-const GOOGLE_REVIEW_URL = "YOUR_GOOGLE_REVIEW_LINK_HERE";
-
-
-// ==========================================
-// VARIABLES
-// ==========================================
-
-let rating = 5;
-
-let selectedProduct = "";
-
-let selectedExperience = [];
-
-let selectedService = "";
+const BUSINESS_LOCATION =
+    "Thane West";
 
 
 // ==========================================
-// RATING
+// GOOGLE REVIEW LINK
 // ==========================================
+//
+// Replace this with your actual Google
+// review link.
+//
 
-const stars = document.querySelectorAll("#stars button");
-
-const ratingText = document.getElementById("ratingText");
-
-
-stars.forEach(star => {
-
-    star.addEventListener("click", () => {
-
-        rating = Number(star.dataset.rating);
-
-        updateStars();
-
-        updateRatingText();
-
-    });
-
-});
-
-
-function updateStars() {
-
-    stars.forEach(star => {
-
-        const value = Number(star.dataset.rating);
-
-        if (value <= rating) {
-
-            star.classList.add("active");
-
-        } else {
-
-            star.classList.remove("active");
-
-        }
-
-    });
-
-}
-
-
-function updateRatingText() {
-
-    const text = {
-
-        1: "Poor",
-
-        2: "Needs Improvement",
-
-        3: "Good",
-
-        4: "Very Good",
-
-        5: "Excellent"
-
-    };
-
-    ratingText.textContent = text[rating];
-
-}
-
-
-updateStars();
+const GOOGLE_REVIEW_URL =
+    "YOUR_GOOGLE_REVIEW_LINK_HERE";
 
 
 // ==========================================
-// PRODUCT SELECTION
+// PRODUCT REVIEWS
+// ==========================================
+
+const productReviews = {
+
+    chair: {
+        product: "Nilkamal Chair",
+
+        review:
+            `I recently purchased a Nilkamal Chair from ${BUSINESS_NAME} in ${BUSINESS_LOCATION}. The chair has excellent quality, a strong and durable build, and a comfortable design. The overall buying experience was smooth and the staff was helpful. I am happy with my purchase and would recommend this store for quality furniture in Thane.`
+    },
+
+
+    table: {
+        product: "Nilkamal Table",
+
+        review:
+            `I recently purchased a Nilkamal Table from ${BUSINESS_NAME} in ${BUSINESS_LOCATION}. The table has a strong build and good quality, and I really liked the design and finish. The staff was helpful and the buying experience was smooth. Overall, I am happy with my purchase and would recommend this store.`
+    },
+
+
+    cupboard: {
+        product: "Nilkamal Cupboard",
+
+        review:
+            `I recently purchased a Nilkamal Cupboard from ${BUSINESS_NAME} in ${BUSINESS_LOCATION}. The cupboard has good quality, a strong build and a practical design. The staff was helpful and the overall shopping experience was smooth. I am satisfied with my purchase and would recommend this store for furniture in Thane.`
+    },
+
+
+    furniture: {
+        product: "Furniture",
+
+        review:
+            `I recently purchased furniture from ${BUSINESS_NAME} in ${BUSINESS_LOCATION}. I was happy with the product quality, design and overall buying experience. The staff was helpful and the service was smooth. Overall, I had a good experience and would recommend this furniture store in Thane.`
+    }
+
+};
+
+
+// ==========================================
+// ELEMENTS
+// ==========================================
+
+const productScreen =
+    document.getElementById("productScreen");
+
+const loadingScreen =
+    document.getElementById("loadingScreen");
+
+const reviewScreen =
+    document.getElementById("reviewScreen");
+
+const reviewText =
+    document.getElementById("reviewText");
+
+const copyBtn =
+    document.getElementById("copyBtn");
+
+const googleBtn =
+    document.getElementById("googleBtn");
+
+const backBtn =
+    document.getElementById("backBtn");
+
+
+// ==========================================
+// PRODUCT CLICK
 // ==========================================
 
 const productButtons =
-    document.querySelectorAll("#productOptions button");
+    document.querySelectorAll(".product");
 
 
 productButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
-        productButtons.forEach(btn => {
+        const productKey =
+            button.dataset.key;
 
-            btn.classList.remove("selected");
+        createReview(productKey);
 
+    });
+
+});
+
+
+// ==========================================
+// CREATE REVIEW
+// ==========================================
+
+function createReview(productKey) {
+
+    const product =
+        productReviews[productKey];
+
+
+    if (!product) {
+
+        alert("Product not found.");
+
+        return;
+
+    }
+
+
+    // Hide product screen
+
+    productScreen.style.display = "none";
+
+
+    // Show loading
+
+    loadingScreen.classList.add("show");
+
+
+    // Simulate AI generation
+
+    setTimeout(() => {
+
+        loadingScreen.classList.remove("show");
+
+
+        reviewText.textContent =
+            product.review;
+
+
+        reviewScreen.classList.add("show");
+
+
+        reviewScreen.scrollIntoView({
+            behavior: "smooth"
         });
 
-        button.classList.add("selected");
 
-        selectedProduct = button.dataset.value;
-
-    });
-
-});
-
-
-// ==========================================
-// EXPERIENCE MULTI SELECTION
-// ==========================================
-
-const experienceButtons =
-    document.querySelectorAll("#experienceOptions button");
-
-
-experienceButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const value = button.dataset.value;
-
-
-        if (selectedExperience.includes(value)) {
-
-            selectedExperience =
-                selectedExperience.filter(item => item !== value);
-
-            button.classList.remove("selected");
-
-        } else {
-
-            selectedExperience.push(value);
-
-            button.classList.add("selected");
-
-        }
-
-    });
-
-});
-
-
-// ==========================================
-// SERVICE
-// ==========================================
-
-const serviceButtons =
-    document.querySelectorAll("#serviceOptions button");
-
-
-serviceButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        serviceButtons.forEach(btn => {
-
-            btn.classList.remove("selected");
-
-        });
-
-        button.classList.add("selected");
-
-        selectedService = button.dataset.value;
-
-    });
-
-});
-
-
-// ==========================================
-// GENERATE REVIEW
-// ==========================================
-
-const generateBtn =
-    document.getElementById("generateBtn");
-
-
-generateBtn.addEventListener("click", () => {
-
-
-    if (!selectedProduct) {
-
-        alert("Please select what you purchased.");
-
-        return;
-
-    }
-
-
-    if (selectedExperience.length === 0) {
-
-        alert("Please select at least one thing you liked.");
-
-        return;
-
-    }
-
-
-    if (!selectedService) {
-
-        alert("Please select your service experience.");
-
-        return;
-
-    }
-
-
-    const review =
-        generateReview();
-
-
-    document.getElementById("reviewText").textContent =
-        review;
-
-
-    document.getElementById("reviewStars").textContent =
-        "★".repeat(rating) +
-        "☆".repeat(5 - rating);
-
-
-    document.getElementById("result").classList.add("show");
-
-
-    document.getElementById("result").scrollIntoView({
-
-        behavior: "smooth"
-
-    });
-
-});
-
-
-// ==========================================
-// REVIEW CREATOR
-// ==========================================
-
-function generateReview() {
-
-    let review = "";
-
-
-    // Opening
-
-    if (rating >= 4) {
-
-        review =
-            `I recently purchased ${selectedProduct} from ${BUSINESS_NAME} in ${BUSINESS_LOCATION}. `;
-
-    } else {
-
-        review =
-            `I recently purchased ${selectedProduct} from ${BUSINESS_NAME}. `;
-
-    }
-
-
-    // Experience
-
-    if (selectedExperience.length === 1) {
-
-        review +=
-            `I really liked ${selectedExperience[0]}. `;
-
-    } else {
-
-        const last =
-            selectedExperience[selectedExperience.length - 1];
-
-        const first =
-            selectedExperience.slice(0, -1).join(", ");
-
-        review +=
-            `I really liked ${first} and ${last}. `;
-
-    }
-
-
-    // Service
-
-    review +=
-        `The ${selectedService} made the overall experience pleasant. `;
-
-
-    // Ending
-
-    if (rating === 5) {
-
-        review +=
-            `Overall, I had an excellent experience and would highly recommend ${BUSINESS_NAME} to others.`;
-
-    } else if (rating === 4) {
-
-        review +=
-            `Overall, I had a very good experience and would recommend this store.`;
-
-    } else if (rating === 3) {
-
-        review +=
-            `Overall, it was a good experience.`;
-
-    } else if (rating === 2) {
-
-        review +=
-            `Overall, the experience was okay, but there is room for improvement.`;
-
-    } else {
-
-        review +=
-            `I hope the overall experience improves in the future.`;
-
-    }
-
-
-    return review;
+    }, 1200);
 
 }
 
 
 // ==========================================
-// COPY
+// COPY REVIEW
 // ==========================================
-
-const copyBtn =
-    document.getElementById("copyBtn");
-
 
 copyBtn.addEventListener("click", async () => {
 
     const text =
-        document.getElementById("reviewText").textContent;
+        reviewText.textContent;
 
 
     try {
 
         await navigator.clipboard.writeText(text);
 
-        copyBtn.textContent = "✓ Review Copied!";
+        copyBtn.textContent =
+            "✓ Review Copied!";
 
 
         setTimeout(() => {
 
-            copyBtn.textContent = "📋 Copy Review";
+            copyBtn.textContent =
+                "📋 Copy Review";
 
         }, 2000);
 
 
-    } catch {
+    } catch (error) {
 
-        alert("Please copy the review manually.");
+        alert(
+            "Please select and copy the review manually."
+        );
 
     }
 
@@ -370,10 +202,6 @@ copyBtn.addEventListener("click", async () => {
 // ==========================================
 // GOOGLE REVIEW
 // ==========================================
-
-const googleBtn =
-    document.getElementById("googleBtn");
-
 
 googleBtn.addEventListener("click", () => {
 
@@ -395,5 +223,23 @@ googleBtn.addEventListener("click", () => {
         GOOGLE_REVIEW_URL,
         "_blank"
     );
+
+});
+
+
+// ==========================================
+// BACK
+// ==========================================
+
+backBtn.addEventListener("click", () => {
+
+    reviewScreen.classList.remove("show");
+
+    productScreen.style.display = "block";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
 });
