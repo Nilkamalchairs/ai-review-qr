@@ -62,7 +62,7 @@ submitBtn.addEventListener("click", () => {
     message.textContent = "Review copied. Opening Google Reviews...";
 
     window.open(
-      "YOUR_GOOGLE_REVIEW_LINK_HERE",
+      "https://g.page/r/CRJUwtLhjq6gEBM/review",
       "_blank"
     );
   });
