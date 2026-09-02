@@ -1,223 +1,335 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>QR Code Generator</title>
-  <meta name="description" content="Generate a QR code from any URL instantly.">
-
-  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Google Review QR Code Generator</title>
+  <meta name="description" content="Create a Google Review QR Code for your business.">  <style>
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      color: #222;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f6f8fb;
+      color: #202124;
     }
 
-    .container {
-      max-width: 500px;
-      margin: 50px auto;
-      padding: 20px;
-    }
-
-    .card {
-      background: #fff;
-      padding: 30px 25px;
-      border-radius: 16px;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    .header {
       text-align: center;
+      padding: 45px 20px 25px;
+    }
+
+    .logo {
+      width: 58px;
+      height: 58px;
+      margin: auto;
+      border-radius: 16px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
     }
 
     h1 {
-      margin-top: 0;
       font-size: 28px;
+      margin: 18px 0 8px;
     }
 
     .subtitle {
-      color: #666;
-      margin-bottom: 25px;
+      color: #6b7280;
+      font-size: 15px;
+      line-height: 1.5;
+      margin: 0 auto;
+      max-width: 420px;
+    }
+
+    .card {
+      width: calc(100% - 30px);
+      max-width: 500px;
+      margin: 10px auto 40px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
     }
 
     input {
       width: 100%;
-      padding: 14px;
-      border: 1px solid #ddd;
+      padding: 14px 15px;
+      border: 1px solid #dadce0;
       border-radius: 10px;
-      font-size: 16px;
+      font-size: 15px;
       outline: none;
       margin-bottom: 15px;
     }
 
     input:focus {
       border-color: #4285f4;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 5px;
+      box-shadow: 0 0 0 3px rgba(66,133,244,0.12);
     }
 
     .generate-btn {
-      background: #111;
-      color: #fff;
+      width: 100%;
+      padding: 15px;
+      border: 0;
+      border-radius: 10px;
+      background: #4285f4;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
     }
 
     .generate-btn:hover {
-      opacity: 0.9;
+      opacity: 0.92;
+    }
+
+    .qr-section {
+      display: none;
+      text-align: center;
+      margin-top: 28px;
+      padding-top: 25px;
+      border-top: 1px solid #eee;
+    }
+
+    .qr-section h2 {
+      font-size: 19px;
+      margin: 0 0 5px;
+    }
+
+    .qr-info {
+      color: #6b7280;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .qr-wrapper {
+      display: inline-block;
+      padding: 18px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+
+    #qrcode canvas {
+      display: block;
     }
 
     .download-btn {
-      background: #4285f4;
-      color: white;
-      display: none;
-      margin-top: 15px;
-    }
-
-    .qr-box {
-      margin-top: 25px;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-
-    #qrcode {
-      padding: 15px;
-      background: white;
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: 1px solid #dadce0;
       border-radius: 10px;
-      display: inline-block;
+      background: #fff;
+      color: #202124;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .download-btn:hover {
+      background: #f8f9fa;
     }
 
     .error {
       color: #d93025;
-      font-size: 14px;
+      font-size: 13px;
       margin-top: 10px;
+      text-align: left;
+    }
+
+    .tip {
+      margin-top: 20px;
+      padding: 12px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      color: #5f6368;
+      font-size: 12px;
+      line-height: 1.5;
     }
 
     .back-link {
-      display: inline-block;
-      margin-top: 25px;
+      display: block;
+      text-align: center;
+      margin-top: 22px;
       color: #4285f4;
       text-decoration: none;
       font-size: 14px;
     }
 
     @media (max-width: 600px) {
-      .container {
-        margin: 20px auto;
+      .header {
+        padding-top: 30px;
+      }
+
+      h1 {
+        font-size: 24px;
       }
 
       .card {
-        padding: 25px 20px;
+        padding: 20px;
       }
     }
-  </style>
-</head>
+  </style></head><body>  <div class="header"><div class="logo">
+  ⭐
+</div>
 
-<body>
+<h1>Google Review QR Code</h1>
 
-  <div class="container">
+<p class="subtitle">
+  Create a QR code that makes it easy for your customers
+  to leave a Google review.
+</p>
 
-    <div class="card">
+  </div>  <div class="card"><label for="businessName">
+  Business Name
+</label>
 
-      <h1>📱 QR Code Generator</h1>
+<input
+  type="text"
+  id="businessName"
+  placeholder="Example: Shree Shivshakti Enterprises"
+>
 
-      <p class="subtitle">
-        Enter any URL to generate a QR code
-      </p>
 
-      <input
-        type="url"
-        id="urlInput"
-        placeholder="https://example.com"
-        autocomplete="off"
-      >
+<label for="reviewUrl">
+  Google Review Link
+</label>
 
-      <button
-        class="generate-btn"
-        id="generateBtn"
-        type="button"
-      >
-        Generate QR Code
-      </button>
+<input
+  type="url"
+  id="reviewUrl"
+  placeholder="Paste your Google Review link"
+  autocomplete="off"
+>
 
-      <div id="error" class="error"></div>
 
-      <div class="qr-box" id="qrBox">
+<button
+  class="generate-btn"
+  id="generateBtn"
+  type="button"
+>
+  ✨ Generate Review QR
+</button>
 
-        <div id="qrcode"></div>
 
-        <button
-          class="download-btn"
-          id="downloadBtn"
-          type="button"
-        >
-          ⬇️ Download QR Code
-        </button>
+<div id="error" class="error"></div>
 
-      </div>
 
-      <a href="index.html" class="back-link">
-        ← Back to Review Generator
-      </a>
+<div class="qr-section" id="qrSection">
 
-    </div>
+  <h2 id="businessTitle">
+    Google Review
+  </h2>
 
+  <p class="qr-info">
+    Scan to leave a Google review
+  </p>
+
+  <div class="qr-wrapper">
+    <div id="qrcode"></div>
   </div>
 
+  <button
+    class="download-btn"
+    id="downloadBtn"
+    type="button"
+  >
+    ⬇️ Download QR Code
+  </button>
 
-  <!-- QR Code Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <div class="tip">
+    💡 Print this QR code and place it at your counter,
+    billing desk, table or packaging.
+  </div>
+
+</div>
 
 
-  <script>
+<a href="index.html" class="back-link">
+  ← Back to Review Generator
+</a>
 
-    const urlInput = document.getElementById("urlInput");
-    const generateBtn = document.getElementById("generateBtn");
-    const qrBox = document.getElementById("qrBox");
-    const qrCode = document.getElementById("qrcode");
-    const downloadBtn = document.getElementById("downloadBtn");
-    const error = document.getElementById("error");
+  </div>  <!-- QR Code Library -->  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>  <script>
 
-    let currentQR = null;
+    const businessName =
+      document.getElementById("businessName");
+
+    const reviewUrl =
+      document.getElementById("reviewUrl");
+
+    const generateBtn =
+      document.getElementById("generateBtn");
+
+    const qrSection =
+      document.getElementById("qrSection");
+
+    const qrCode =
+      document.getElementById("qrcode");
+
+    const downloadBtn =
+      document.getElementById("downloadBtn");
+
+    const businessTitle =
+      document.getElementById("businessTitle");
+
+    const error =
+      document.getElementById("error");
 
 
     generateBtn.addEventListener("click", function () {
 
-      const url = urlInput.value.trim();
+      const name = businessName.value.trim();
+      const url = reviewUrl.value.trim();
 
       error.textContent = "";
 
-      if (!url) {
-        error.textContent = "Please enter a URL.";
+
+      if (!name) {
+        error.textContent =
+          "Please enter your business name.";
         return;
       }
+
+
+      if (!url) {
+        error.textContent =
+          "Please paste your Google Review link.";
+        return;
+      }
+
 
       try {
         new URL(url);
       } catch {
         error.textContent =
-          "Please enter a valid URL. Example: https://example.com";
+          "Please enter a valid Google Review link.";
         return;
       }
 
 
-      // Clear previous QR
+      // Remove previous QR
       qrCode.innerHTML = "";
 
-      // Generate new QR
-      currentQR = new QRCode(qrCode, {
+
+      // Business name
+      businessTitle.textContent =
+        name;
+
+
+      // Generate QR
+      new QRCode(qrCode, {
         text: url,
         width: 250,
         height: 250,
@@ -225,42 +337,48 @@
       });
 
 
-      qrBox.style.display = "flex";
-      downloadBtn.style.display = "block";
+      qrSection.style.display = "block";
+
+
+      // Scroll to QR
+      qrSection.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
 
     });
 
 
     downloadBtn.addEventListener("click", function () {
 
-      const canvas = qrCode.querySelector("canvas");
-      const image = qrCode.querySelector("img");
+      const canvas =
+        qrCode.querySelector("canvas");
 
-      let downloadURL;
-
-      if (canvas) {
-        downloadURL = canvas.toDataURL("image/png");
-      } else if (image) {
-        downloadURL = image.src;
-      } else {
+      if (!canvas) {
         return;
       }
 
 
-      const link = document.createElement("a");
+      const link =
+        document.createElement("a");
 
-      link.href = downloadURL;
-      link.download = "qr-code.png";
+      link.download =
+        "google-review-qr.png";
+
+      link.href =
+        canvas.toDataURL("image/png");
+
 
       document.body.appendChild(link);
+
       link.click();
+
       document.body.removeChild(link);
 
     });
 
 
-    // Press Enter to generate
-    urlInput.addEventListener("keydown", function (event) {
+    reviewUrl.addEventListener("keydown", function(event) {
 
       if (event.key === "Enter") {
         generateBtn.click();
@@ -268,7 +386,5 @@
 
     });
 
-  </script>
-
-</body>
+  </script></body>
 </html>
