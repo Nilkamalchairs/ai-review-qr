@@ -89,7 +89,7 @@ submitBtn.addEventListener("click", async () => {
       
     setTimeout(() => {
   window.location.href =
-    "https://www.google.com/maps/search/?api=1&query=Shree+Shivshakti+Enterprises+Thane+West";
+    "https://g.page/r/CRJUwtLhjq6gEBM/review";
 }, 500);
   }
 });
