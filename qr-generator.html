@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>QR Code Generator</title>
+  <meta name="description" content="Generate a QR code from any URL instantly.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #222;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+      margin-bottom: 15px;
+    }
+
+    input:focus {
+      border-color: #4285f4;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .generate-btn {
+      background: #111;
+      color: #fff;
+    }
+
+    .generate-btn:hover {
+      opacity: 0.9;
+    }
+
+    .download-btn {
+      background: #4285f4;
+      color: white;
+      display: none;
+      margin-top: 15px;
+    }
+
+    .qr-box {
+      margin-top: 25px;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    #qrcode {
+      padding: 15px;
+      background: white;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    .error {
+      color: #d93025;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 25px;
+      color: #4285f4;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px auto;
+      }
+
+      .card {
+        padding: 25px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="card">
+
+      <h1>📱 QR Code Generator</h1>
+
+      <p class="subtitle">
+        Enter any URL to generate a QR code
+      </p>
+
+      <input
+        type="url"
+        id="urlInput"
+        placeholder="https://example.com"
+        autocomplete="off"
+      >
+
+      <button
+        class="generate-btn"
+        id="generateBtn"
+        type="button"
+      >
+        Generate QR Code
+      </button>
+
+      <div id="error" class="error"></div>
+
+      <div class="qr-box" id="qrBox">
+
+        <div id="qrcode"></div>
+
+        <button
+          class="download-btn"
+          id="downloadBtn"
+          type="button"
+        >
+          ⬇️ Download QR Code
+        </button>
+
+      </div>
+
+      <a href="index.html" class="back-link">
+        ← Back to Review Generator
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- QR Code Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+
+  <script>
+
+    const urlInput = document.getElementById("urlInput");
+    const generateBtn = document.getElementById("generateBtn");
+    const qrBox = document.getElementById("qrBox");
+    const qrCode = document.getElementById("qrcode");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const error = document.getElementById("error");
+
+    let currentQR = null;
+
+
+    generateBtn.addEventListener("click", function () {
+
+      const url = urlInput.value.trim();
+
+      error.textContent = "";
+
+      if (!url) {
+        error.textContent = "Please enter a URL.";
+        return;
+      }
+
+      try {
+        new URL(url);
+      } catch {
+        error.textContent =
+          "Please enter a valid URL. Example: https://example.com";
+        return;
+      }
+
+
+      // Clear previous QR
+      qrCode.innerHTML = "";
+
+      // Generate new QR
+      currentQR = new QRCode(qrCode, {
+        text: url,
+        width: 250,
+        height: 250,
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+
+      qrBox.style.display = "flex";
+      downloadBtn.style.display = "block";
+
+    });
+
+
+    downloadBtn.addEventListener("click", function () {
+
+      const canvas = qrCode.querySelector("canvas");
+      const image = qrCode.querySelector("img");
+
+      let downloadURL;
+
+      if (canvas) {
+        downloadURL = canvas.toDataURL("image/png");
+      } else if (image) {
+        downloadURL = image.src;
+      } else {
+        return;
+      }
+
+
+      const link = document.createElement("a");
+
+      link.href = downloadURL;
+      link.download = "qr-code.png";
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+    });
+
+
+    // Press Enter to generate
+    urlInput.addEventListener("keydown", function (event) {
+
+      if (event.key === "Enter") {
+        generateBtn.click();
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
