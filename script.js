@@ -88,7 +88,8 @@ submitBtn.addEventListener("click", async () => {
       "Please copy the review manually, then submit it on Google.";
       
     setTimeout(() => {
-      window.location.href = GOOGLE_REVIEW_URL;
-    }, 1000);
+  window.location.href =
+    "https://www.google.com/maps/search/?api=1&query=Shree+Shivshakti+Enterprises+Thane+West";
+}, 500);
   }
 });
