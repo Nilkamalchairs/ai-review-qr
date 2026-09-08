@@ -43,11 +43,45 @@ body {
 }
 
 
-.logo img {
-    width: 42px;
-    height: 42px;
+/* ========================================
+   GOOGLE REVIEW LOGO
+======================================== */
 
-    margin-bottom: 10px;
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 12px;
+}
+
+.logo img {
+    display: block;
+
+    width: 150px;
+    height: auto;
+
+    max-width: 70%;
+
+    object-fit: contain;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+}
+
+
+/* ========================================
+   MOBILE LOGO
+======================================== */
+
+@media (max-width: 600px) {
+
+    .logo img {
+        width: 130px;
+        max-width: 65%;
+    }
+
 }
 
 
