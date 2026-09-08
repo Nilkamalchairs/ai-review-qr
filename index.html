@@ -180,57 +180,6 @@
 <script src="script.js"></script>
 
 
-<script>
-    // Google Maps Business Listing
-    const googleMapURL =
-        "https://maps.app.goo.gl/tiEruQ4SLro3ExLU6";
-
-    // Google Map Button
-    document.getElementById("googleMapBtn").addEventListener("click", async function () {
-
-        const review = document.getElementById("review").value.trim();
-
-        // Check if review is available
-        if (!review) {
-            document.getElementById("message").textContent =
-                "Please generate your review first.";
-            return;
-        }
-
-        try {
-
-            // Copy review
-            await navigator.clipboard.writeText(review);
-
-            document.getElementById("message").textContent =
-                "Review copied! Opening Google Maps...";
-
-            // Open Google Maps
-            setTimeout(function () {
-                window.location.href = googleMapURL;
-            }, 500);
-
-        } catch (error) {
-
-            // Fallback for browsers where clipboard API is blocked
-            const textarea = document.createElement("textarea");
-            textarea.value = review;
-
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand("copy");
-            textarea.remove();
-
-            document.getElementById("message").textContent =
-                "Review copied! Opening Google Maps...";
-
-            setTimeout(function () {
-                window.location.href = googleMapURL;
-            }, 500);
-        }
-
-    });
-</script>
 
     
 
