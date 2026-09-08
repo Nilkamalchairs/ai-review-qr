@@ -44,7 +44,7 @@ async function generateReviews() {
         "✨ Generating 5 different reviews...";
 
 
-    // Show 5 loading cards
+    // Show loading cards
 
     for (let i = 1; i <= 5; i++) {
 
@@ -55,13 +55,15 @@ async function generateReviews() {
 
     try {
 
-        /*
-         * Send 5 requests simultaneously.
-         */
+        // Generate 5 different variations
 
         const requests = Array.from(
             { length: 5 },
-            () => generateSingleReview(product)
+            (_, index) =>
+                generateSingleReview(
+                    product,
+                    index + 1
+                )
         );
 
 
@@ -72,17 +74,23 @@ async function generateReviews() {
         reviewsContainer.innerHTML = "";
 
 
-        // Remove exact duplicates
+        // Remove duplicates
 
         const uniqueReviews =
             [...new Set(
                 reviews
-                    .map(review => review.trim())
-                    .filter(review => review.length > 0)
+                    .map(review =>
+                        String(review).trim()
+                    )
+                    .filter(review =>
+                        review.length > 0
+                    )
             )];
 
 
-        if (uniqueReviews.length === 0) {
+        if (
+            uniqueReviews.length === 0
+        ) {
 
             throw new Error(
                 "No reviews generated."
@@ -131,31 +139,50 @@ async function generateReviews() {
 // GENERATE SINGLE REVIEW
 // ========================================
 
-async function generateSingleReview(product) {
+async function generateSingleReview(
+    product,
+    variation
+) {
 
     const response =
-        await fetch(WORKER_URL, {
+        await fetch(
+            WORKER_URL,
+            {
 
-            method: "POST",
+                method: "POST",
 
-            headers: {
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
 
-                "Content-Type":
-                    "application/json"
+                body: JSON.stringify({
 
-            },
+                    product: product,
 
-            body: JSON.stringify({
+                    variation: variation
 
-                product: product
+                })
 
-            })
-
-        });
+            }
+        );
 
 
-    const data =
-        await response.json();
+    let data;
+
+
+    try {
+
+        data =
+            await response.json();
+
+    } catch (error) {
+
+        throw new Error(
+            "Worker returned an invalid response."
+        );
+
+    }
 
 
     if (
@@ -165,20 +192,22 @@ async function generateSingleReview(product) {
 
         throw new Error(
             data.error ||
-            "Unable to generate review"
+            `Worker error: ${response.status}`
         );
 
     }
 
 
-    return data.review.trim();
+    return String(
+        data.review || ""
+    ).trim();
 
 }
 
 
 
 // ========================================
-// LOADING CARD
+// CREATE LOADING CARD
 // ========================================
 
 function createLoadingCard(number) {
@@ -285,7 +314,9 @@ function createReviewCard(
 
 
     const textarea =
-        card.querySelector(".review-text");
+        card.querySelector(
+            ".review-text"
+        );
 
 
     textarea.value =
@@ -294,7 +325,7 @@ function createReviewCard(
 
 
     // ====================================
-    // SUBMIT REVIEW
+    // SUBMIT REVIEW BUTTON
     // ====================================
 
     const submitButton =
@@ -337,12 +368,15 @@ function createReviewCard(
                     "✅ Review copied! Opening Google Reviews...";
 
 
-                setTimeout(function () {
+                setTimeout(
+                    function () {
 
-                    window.location.href =
-                        GOOGLE_REVIEW_URL;
+                        window.location.href =
+                            GOOGLE_REVIEW_URL;
 
-                }, 700);
+                    },
+                    700
+                );
 
 
             } else {
@@ -351,12 +385,15 @@ function createReviewCard(
                     "⚠️ Please copy the review manually. Opening Google Reviews...";
 
 
-                setTimeout(function () {
+                setTimeout(
+                    function () {
 
-                    window.location.href =
-                        GOOGLE_REVIEW_URL;
+                        window.location.href =
+                            GOOGLE_REVIEW_URL;
 
-                }, 1200);
+                    },
+                    1200
+                );
 
             }
 
@@ -366,7 +403,7 @@ function createReviewCard(
 
 
     // ====================================
-    // GOOGLE MAP
+    // GOOGLE MAP BUTTON
     // ====================================
 
     const mapButton =
@@ -409,12 +446,15 @@ function createReviewCard(
                     "✅ Review copied! Opening Google Maps...";
 
 
-                setTimeout(function () {
+                setTimeout(
+                    function () {
 
-                    window.location.href =
-                        GOOGLE_MAP_URL;
+                        window.location.href =
+                            GOOGLE_MAP_URL;
 
-                }, 700);
+                    },
+                    700
+                );
 
 
             } else {
@@ -423,12 +463,15 @@ function createReviewCard(
                     "⚠️ Please copy the review manually. Opening Google Maps...";
 
 
-                setTimeout(function () {
+                setTimeout(
+                    function () {
 
-                    window.location.href =
-                        GOOGLE_MAP_URL;
+                        window.location.href =
+                            GOOGLE_MAP_URL;
 
-                }, 1200);
+                    },
+                    1200
+                );
 
             }
 
@@ -436,7 +479,9 @@ function createReviewCard(
     );
 
 
-    reviewsContainer.appendChild(card);
+    reviewsContainer.appendChild(
+        card
+    );
 
 }
 
@@ -467,12 +512,14 @@ async function copyText(text) {
     }
 
 
-    // Fallback
+    // Fallback method
 
     try {
 
         const textarea =
-            document.createElement("textarea");
+            document.createElement(
+                "textarea"
+            );
 
 
         textarea.value =
@@ -501,14 +548,11 @@ async function copyText(text) {
 
         textarea.select();
 
-        textarea.setSelectionRange(
-            0,
-            textarea.value.length
-        );
-
 
         const copied =
-            document.execCommand("copy");
+            document.execCommand(
+                "copy"
+            );
 
 
         textarea.remove();
@@ -538,5 +582,9 @@ async function copyText(text) {
 
 productSelect.addEventListener(
     "change",
-    generateReviews
+    function () {
+
+        generateReviews();
+
+    }
 );
