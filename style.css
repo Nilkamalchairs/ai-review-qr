@@ -4,6 +4,31 @@
     padding: 0;
 }
 
+.google-map-btn {
+    width: 100%;
+    padding: 14px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #4285F4;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.google-map-btn:hover {
+    opacity: 0.9;
+}
+
+.google-map-btn:active {
+    transform: scale(0.98);
+}
+
+
+
+
 body {
     font-family: Arial, Helvetica, sans-serif;
 
