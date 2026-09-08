@@ -8,9 +8,9 @@ const GOOGLE_MAP_URL =
   "https://maps.app.goo.gl/tiEruQ4SLro3ExLU6";
 
 
-// ===============================
+// ========================================
 // ELEMENTS
-// ===============================
+// ========================================
 
 const productSelect =
   document.getElementById("product");
@@ -31,27 +31,58 @@ const message =
   document.getElementById("message");
 
 
-// ===============================
-// GENERATE REVIEW
-// ===============================
+// ========================================
+// PRODUCT LIST
+// ========================================
+
+const products = [
+  "Nilkamal Chair",
+  "Nilkamal Cabinet",
+  "Nilkamal Product",
+  "Nilkamal Shoe Rack",
+  "Steel Sofacumbed",
+  "Steel Cupboard",
+  "Washing Machine Stand",
+  "Wooden Mandir",
+  "Plastic Heavy Quality Table",
+  "Wooden Folding Table",
+  "Plastic Folding Table",
+  "Study Table"
+];
+
+
+// ========================================
+// GENERATE AI REVIEW
+// ========================================
 
 async function generateReview() {
 
   const product =
-    productSelect.value;
+    productSelect.value.trim();
 
 
-  // No product selected
+  // Check product
   if (!product) {
 
     reviewBox.value = "";
+
     message.textContent = "";
 
     return;
   }
 
 
-  // Clear old review
+  // Check product is valid
+  if (!products.includes(product)) {
+
+    message.textContent =
+      "⚠️ Please select a valid product.";
+
+    return;
+  }
+
+
+  // Clear previous review
   reviewBox.value = "";
 
   message.textContent =
@@ -74,7 +105,9 @@ async function generateReview() {
         },
 
         body: JSON.stringify({
+
           product: product
+
         })
 
       });
@@ -97,18 +130,21 @@ async function generateReview() {
     }
 
 
-    // Put generated review in textarea
+    // Put AI review into textarea
     reviewBox.value =
       data.review.trim();
 
 
     message.textContent =
-      "Review generated. You can edit it before submitting.";
+      "✅ Review generated. You can edit it before submitting.";
 
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "Review generation error:",
+      error
+    );
 
 
     message.textContent =
@@ -123,9 +159,9 @@ async function generateReview() {
 
 
 
-// ===============================
-// PRODUCT → GENERATE REVIEW
-// ===============================
+// ========================================
+// PRODUCT CHANGE
+// ========================================
 
 productSelect.addEventListener(
   "change",
@@ -134,9 +170,9 @@ productSelect.addEventListener(
 
 
 
-// ===============================
-// REWRITE
-// ===============================
+// ========================================
+// REWRITE REVIEW
+// ========================================
 
 rewriteBtn.addEventListener(
   "click",
@@ -145,9 +181,9 @@ rewriteBtn.addEventListener(
 
 
 
-// ===============================
-// COPY REVIEW FUNCTION
-// ===============================
+// ========================================
+// COPY REVIEW
+// ========================================
 
 async function copyReview() {
 
@@ -155,16 +191,18 @@ async function copyReview() {
     reviewBox.value.trim();
 
 
+  // No review
   if (!review) {
 
-    message.textContent =
-      "⚠️ Please generate a review first.";
-
     return false;
+
   }
 
 
-  // Modern Clipboard API
+  // ======================================
+  // MODERN CLIPBOARD
+  // ======================================
+
   try {
 
     await navigator.clipboard.writeText(
@@ -176,70 +214,72 @@ async function copyReview() {
   } catch (error) {
 
     console.warn(
-      "Clipboard API failed. Trying fallback..."
+      "Clipboard API failed. Using fallback."
+    );
+
+  }
+
+
+  // ======================================
+  // FALLBACK COPY
+  // ======================================
+
+  try {
+
+    const textarea =
+      document.createElement("textarea");
+
+
+    textarea.value =
+      review;
+
+
+    textarea.style.position =
+      "fixed";
+
+    textarea.style.left =
+      "-9999px";
+
+    textarea.style.top =
+      "0";
+
+    textarea.style.opacity =
+      "0";
+
+
+    document.body.appendChild(
+      textarea
     );
 
 
-    // ===============================
-    // FALLBACK COPY METHOD
-    // ===============================
+    textarea.focus();
 
-    try {
+    textarea.select();
 
-      const textarea =
-        document.createElement("textarea");
-
-
-      textarea.value =
-        review;
+    textarea.setSelectionRange(
+      0,
+      textarea.value.length
+    );
 
 
-      textarea.style.position =
-        "fixed";
-
-      textarea.style.left =
-        "-9999px";
-
-      textarea.style.top =
-        "0";
-
-      textarea.style.opacity =
-        "0";
+    const copied =
+      document.execCommand("copy");
 
 
-      document.body.appendChild(
-        textarea
-      );
+    textarea.remove();
 
 
-      textarea.focus();
+    return copied;
 
-      textarea.select();
+  } catch (error) {
 
-      textarea.setSelectionRange(
-        0,
-        textarea.value.length
-      );
-
-
-      const successful =
-        document.execCommand("copy");
+    console.error(
+      "Copy failed:",
+      error
+    );
 
 
-      textarea.remove();
-
-
-      return successful;
-
-    } catch (fallbackError) {
-
-      console.error(
-        fallbackError
-      );
-
-      return false;
-
-    }
+    return false;
 
   }
 
@@ -247,9 +287,9 @@ async function copyReview() {
 
 
 
-// ===============================
+// ========================================
 // SUBMIT REVIEW
-// ===============================
+// ========================================
 
 submitBtn.addEventListener(
   "click",
@@ -265,6 +305,7 @@ submitBtn.addEventListener(
         "⚠️ Please generate a review first.";
 
       return;
+
     }
 
 
@@ -278,7 +319,7 @@ submitBtn.addEventListener(
     if (copied) {
 
       message.textContent =
-        "✅ Review copied. Opening Google Reviews...";
+        "✅ Review copied! Opening Google Reviews...";
 
 
       setTimeout(function () {
@@ -286,13 +327,13 @@ submitBtn.addEventListener(
         window.location.href =
           GOOGLE_REVIEW_URL;
 
-      }, 500);
+      }, 700);
 
 
     } else {
 
       message.textContent =
-        "⚠️ Please copy the review manually, then submit it on Google.";
+        "⚠️ Please copy the review manually. Opening Google Reviews...";
 
 
       setTimeout(function () {
@@ -300,7 +341,7 @@ submitBtn.addEventListener(
         window.location.href =
           GOOGLE_REVIEW_URL;
 
-      }, 1000);
+      }, 1200);
 
     }
 
@@ -309,10 +350,10 @@ submitBtn.addEventListener(
 
 
 
-// ===============================
+// ========================================
 // GOOGLE MAP
 // COPY REVIEW + OPEN MAP
-// ===============================
+// ========================================
 
 if (googleMapBtn) {
 
@@ -330,6 +371,7 @@ if (googleMapBtn) {
           "⚠️ Please generate a review first.";
 
         return;
+
       }
 
 
@@ -348,9 +390,9 @@ if (googleMapBtn) {
 
 
         /*
-         * Small delay gives Android
-         * enough time to finish clipboard
-         * operation before navigation.
+         * Wait briefly so the clipboard
+         * operation completes before
+         * navigating.
          */
 
         setTimeout(function () {
@@ -364,19 +406,15 @@ if (googleMapBtn) {
       } else {
 
         message.textContent =
-          "⚠️ Please copy the review manually.";
+          "⚠️ Please copy the review manually. Opening Google Maps...";
 
-
-        /*
-         * Still open Google Maps
-         */
 
         setTimeout(function () {
 
           window.location.href =
             GOOGLE_MAP_URL;
 
-        }, 1000);
+        }, 1200);
 
       }
 
