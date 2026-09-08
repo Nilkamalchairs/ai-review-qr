@@ -58,12 +58,12 @@ body {
 .logo img {
     display: block;
 
-    width: 200px;
+    width: 190px;
     height: auto;
 
-   
+    max-width: 70%;
 
-   
+    object-fit: contain;
 
     user-select: none;
 
@@ -78,8 +78,8 @@ body {
 @media (max-width: 600px) {
 
     .logo img {
-        width: 200px;
-        
+        width: 180px;
+        max-width: 65%;
     }
 
 }
