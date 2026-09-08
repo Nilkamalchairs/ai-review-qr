@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="https://www.google.com/s2/favicons?domain=google.com&sz=64">
+    <link rel="icon" type="image/png" href="https://www.google.com/s2/favicons?domain=google.com&sz=64">
+
     <title>Google Trust Review</title>
 
     <meta
@@ -24,10 +24,10 @@
     <header class="header">
 
         <div class="logo">
-  <img 
-    src="https://www.google.com/images/branding/product/ico/googleg_lodp.ico"
-    alt="Google Reviews"
-  >
+            <img 
+                src="https://www.google.com/images/branding/product/ico/googleg_lodp.ico"
+                alt="Google Reviews"
+            >
         </div>
 
         <h1>Nilkamal - SHREE SHIVSHAKTI ENTERPRISES</h1>
@@ -70,7 +70,7 @@
                 </option>
 
                 <option value="Nilkamal Furniture">
-                   wooden Mandir
+                    Wooden Mandir
                 </option>
 
                 <option value="Nilkamal Furniture">
@@ -82,7 +82,7 @@
                 </option>
 
                 <option value="Nilkamal Furniture">
-                    folding Bed
+                    Folding Bed
                 </option>
 
             </select>
@@ -111,13 +111,22 @@
         <div class="buttons">
 
             <button id="submitBtn" type="button" class="submit-btn">
-  ⭐ Submit Review
-</button>
-
+                ⭐ Submit Review
+            </button>
 
             <button id="rewriteBtn" type="button" class="rewrite-btn">
-  ✨ Rewrite
-</button>
+                ✨ Rewrite
+            </button>
+
+            <!-- GOOGLE MAP BUTTON -->
+
+            <button
+                id="googleMapBtn"
+                type="button"
+                class="google-map-btn"
+            >
+                📍 Google Map
+            </button>
 
         </div>
 
@@ -149,6 +158,24 @@
 
 </div>
 
+
+<script>
+
+    // Google Maps Business Listing
+    const googleMapURL =
+        "https://maps.app.goo.gl/tiEruQ4SLro3ExLU6";
+
+    // Google Map Button
+    document.getElementById("googleMapBtn").addEventListener("click", function () {
+
+        window.open(
+            googleMapURL,
+            "_blank"
+        );
+
+    });
+
+</script>
 
 <script src="script.js"></script>
 
