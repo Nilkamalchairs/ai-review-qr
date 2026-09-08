@@ -1,36 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://www.google.com/s2/favicons?domain=google.com&sz=64">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="https://www.google.com/s2/favicons?domain=google.com&sz=64"
+    >
 
     <title>Google Trust Review</title>
 
     <meta
         name="description"
-        content="Generate a natural Google review in seconds."
+        content="Generate natural customer reviews in seconds."
     >
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
 <div class="app">
+
 
     <!-- HEADER -->
 
     <header class="header">
 
         <div class="logo">
-            <img 
+
+            <img
                 src="https://www.google.com/images/branding/product/ico/googleg_lodp.ico"
-                alt="Google Reviews"
+                alt="Google"
             >
+
         </div>
 
-        <h1>Nilkamal - SHREE SHIVSHAKTI ENTERPRISES</h1>
+
+        <h1>
+            Nilkamal - SHREE SHIVSHAKTI ENTERPRISES
+        </h1>
+
 
         <p>
             Share your experience with us
@@ -39,117 +59,79 @@
     </header>
 
 
+
     <!-- MAIN -->
 
     <main class="card">
+
 
         <!-- PRODUCT -->
 
         <div class="section">
 
-            <label>
+            <label for="product">
                 Select Product
             </label>
 
+
             <select id="product">
 
-    <option value="">
-        Select a product
-    </option>
+                <option value="">
+                    Select a product
+                </option>
 
-    <option value="Nilkamal Chair">
-        Nilkamal Chair
-    </option>
+                <option value="Nilkamal Chair">
+                    Nilkamal Chair
+                </option>
 
-    <option value="Nilkamal Cabinet">
-        Nilkamal Cabinet
-    </option>
+                <option value="Nilkamal Cabinet">
+                    Nilkamal Cabinet
+                </option>
 
-    <option value="Nilkamal Product">
-        Nilkamal Product
-    </option>
+                <option value="Nilkamal Product">
+                    Nilkamal Product
+                </option>
 
-    <option value="Nilkamal Shoe Rack">
-        Nilkamal Shoe Rack
-    </option>
+                <option value="Nilkamal Shoe Rack">
+                    Nilkamal Shoe Rack
+                </option>
 
-    <option value="Steel Sofacumbed">
-        Steel Sofacumbed
-    </option>
+                <option value="Steel Sofacumbed">
+                    Steel Sofacumbed
+                </option>
 
-    <option value="Steel Cupboard">
-        Steel Cupboard
-    </option>
+                <option value="Steel Cupboard">
+                    Steel Cupboard
+                </option>
 
-    <option value="Washing Machine Stand">
-        Washing Machine Stand
-    </option>
+                <option value="Washing Machine Stand">
+                    Washing Machine Stand
+                </option>
 
-    <option value="Wooden Mandir">
-        Wooden Mandir
-    </option>
+                <option value="Wooden Mandir">
+                    Wooden Mandir
+                </option>
 
-    <option value="Plastic Heavy Quality Table">
-        Plastic Heavy Quality Table
-    </option>
+                <option value="Plastic Heavy Quality Table">
+                    Plastic Heavy Quality Table
+                </option>
 
-    <option value="Wooden Folding Table">
-        Wooden Folding Table
-    </option>
+                <option value="Wooden Folding Table">
+                    Wooden Folding Table
+                </option>
 
-    <option value="Plastic Folding Table">
-        Plastic Folding Table
-    </option>
+                <option value="Plastic Folding Table">
+                    Plastic Folding Table
+                </option>
 
-    <option value="Study Table">
-        Study Table
-    </option>
+                <option value="Study Table">
+                    Study Table
+                </option>
 
-</select>
-
-
-        </div>
-
-
-        <!-- REVIEW -->
-
-        <div class="section">
-
-            <label>
-                Your Review
-            </label>
-
-            <textarea
-                id="review"
-                placeholder="Your review will be written automatically..."
-            ></textarea>
+            </select>
 
         </div>
 
-
-        <!-- BUTTONS -->
-
-        <div class="buttons">
-
-            <button id="submitBtn" type="button" class="submit-btn">
-                ⭐ Submit Review
-            </button>
-
-            <button id="rewriteBtn" type="button" class="rewrite-btn">
-                ✨ Rewrite
-            </button>
-
-            <!-- GOOGLE MAP BUTTON -->
-
-            <button
-                id="googleMapBtn"
-                type="button"
-                class="google-map-btn"
-            >
-                📍 Google Map
-            </button>
-
-        </div>
 
 
         <!-- MESSAGE -->
@@ -157,35 +139,47 @@
         <div
             id="message"
             class="message"
+            aria-live="polite"
         ></div>
 
 
+
+        <!-- REVIEW CARDS -->
+
+        <div
+            id="reviewsContainer"
+            class="reviews-container"
+        ></div>
+
+
+
+        <!-- NOTICE -->
+
         <p class="notice">
 
-            Please check the review and make sure it
-            accurately reflects your genuine experience
-            before submitting.
+            Please check each review and make sure it accurately
+            reflects your genuine experience before submitting.
 
         </p>
 
     </main>
 
 
+
+    <!-- FOOTER -->
+
     <footer>
 
-        Google Review - © 2026 - 27
+        Google Review - © 2026
 
     </footer>
+
 
 </div>
 
 
-
 <script src="script.js"></script>
 
-
-
-    
-
 </body>
+
 </html>
