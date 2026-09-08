@@ -58,7 +58,7 @@ body {
 .logo img {
     display: block;
 
-    width: 50%;
+    width: 200px;
     height: auto;
 
    
@@ -78,7 +78,7 @@ body {
 @media (max-width: 600px) {
 
     .logo img {
-        width: 50%;
+        width: 200px;
         
     }
 
